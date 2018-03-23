@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>device show</title>
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/prettify.css">
+  <link href="http://www.jq22.com/jquery/font-awesome.4.6.0.css" rel="stylesheet" type="text/css" >
+  <link rel="stylesheet" type="text/css" href="./css/build.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+  <link rel="stylesheet" type="text/css" href="./css/device.css">
+  <link rel="stylesheet" type="text/css" href="./css/log.css">
+
+
+
+
+</head>
+<body>
+
+
+<div id="north-part" class="container row">
+
+  <div id="device" class="col-md-offset-1 col-md-3">
+
+    <div id="main-control" class="col-md-12">
+      <div class="main-control-icon">
+        <p>
+        <span>投影</span>
+        <i class="upload glyphicon glyphicon-align-justify" id="menu"></i>
+        <i class="upload glyphicon glyphicon-home" id="home"></i>
+        <i class="upload glyphicon glyphicon-circle-arrow-left" id="back"></i>
+        <i class="upload glyphicon glyphicon-pencil"></i>
+        <i class="upload glyphicon glyphicon-cloud-upload"></i>
+      </p>
+      </div>
+    </div>
+    <div id="device-show" class="col-md-11"></div>
+
+  </div>
+
+  <div id="aux-control" class="col-md-8 container">
+
+
+    <div id="other" class="col-md-12">
+
+      <div id="record-block" class="form-group  form-group-md row">
+        <label for="record" class="col-md-2 control-label">脚本录制</label>
+        <div class="col-md-10" id="record">
+
+          <small class="col-md-2 record-method  device-case-selected">坐标</small>
+          <small class="col-md-2 record-method">其他</small>
+
+          <small id='easy' class="col-md-offset-1 col-md-2 record-mode  mode-selected">easy-mode</small>
+          <small id='strict' class="col-md-2 record-mode">strict-mode</small>
+          <small style="color:red;font-weight:bold;">请不要把验证点放在最后一步,可以多录制一步</small>
+
+         <input type="text" name="" id="recordname" placeholder="请输入用例名称" class="col-md-12" />
+          <textarea name="" id="tip" placeholder="这用例是做什么的呢" class="col-md-12"></textarea>
+        
+          <a href="#" id="btn-record" class="btn btn-info btn-sm col-md-offset-4 col-md-2"  >开始录制</a>
+ 
+          <a href="#" id="btn-refresh" class="btn btn-info btn-sm col-md-offset-1 col-md-2 " >刷 新</a>
+
+          <a href="#" id="btn-screenshot" class="btn btn-info btn-sm col-md-offset-1 col-md-2">手动截屏</a>
+
+          <span id="timerecord" style="display:none;"></span>
+
+        </div>
+      </div>
+
+      <div id="back" class="form-group  form-group-md row">
+        <label for="playback" class="col-md-2 control-label">脚本回放</label>
+        <div class="col-md-10" id="playback">
+
+          <div id="historymsg" class=""></div>
+
+          <div id="deviceinfo" class=""></div>
+
+ <!--          <div id="target" class="col-md-12"></div> -->
+
+          <div id="result" class=""></div>
+
+        
+
+          <a href="#" id="btn-playback" class="btn btn-info btn-sm col-md-offset-10 col-md-2">开始回放</a>
+
+        </div>
+      </div>
+
+      <div id="msg" class="form-group  form-group-md row">
+        <label for="message" class="col-md-2 control-label">文本信息</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" id="message" placeholder="填写内容 enter发送">
+        </div>
+      </div>
+
+      <div id="msg" class="form-group  form-group-md row">
+        <label for="adbshell" class="col-md-2 control-label">adb shell</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" id="adbshell" placeholder="adb shell命令 enter发送">
+        </div>
+      </div>
+
+
+      <div id="msg" class="form-group  form-group-md row">
+        <label for="apk" class="col-md-2 control-label">apk上传</label>
+        <div class="col-md-10">
+          <input type="file" class="form-control" id="apk" placeholder="apk上传">
+        </div>
+      </div>
+
+
+
+
+
+
+
+      
+
+    </div>
+    
+    
+
+  </div>
+
+
+</div>
+
+<div id="south-part">
+  <div  id="toggle" style="text-align: center;"><i class="glyphicon glyphicon-chevron-up"></i><span>log</span></div>
+  <div id="log" class="hidden row">
+    <div id="left" class="col-md-3">
+      <div id="filter-control">
+        <input type="text" name="" id="filter-name" placeholder="save filters">
+        <i class="glyphicon glyphicon-plus"></i>
+        <i class="glyphicon glyphicon-minus"></i>
+        <i class="glyphicon glyphicon-edit"></i>
+      </div>
+      <div id="filter-list"></div>
+      
+
+    </div>
+    <div id="right" class="col-md-9">
+      <div id="info-control" class="col-md-12">
+        <input type="text" name="" id="filter-info" placeholder="">
+        <i class="glyphicon glyphicon-floppy-save"></i>
+        <i class="glyphicon glyphicon-floppy-remove"></i>
+
+      </div>
+
+      <div id="info-show">
+        <table class="table striped">
+          <tr>
+            <th>level</th>
+            <th>time</th>
+            <th>pid</th>
+            <th>tid</th>
+            <th>application</th>
+            <th>tag</th>
+            <th>text</th>
+
+          </tr>
+        </table>
+        
+
+      </div>
+      
+
+    </div>
+  </div>
+</div>
+
+<canvas id="src"  style="display:none;"></canvas>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="./js/run_prettify.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/scale.min.js"></script>
+  <script src="./js/v.js"></script>  
+  <script src="./js/draw.js"></script>
+  <script src="./js/touch.js"></script>
+  <script src="./js/log.js"></script>
+  <script src="./js/record.js"></script>  
+</body>
+</html>

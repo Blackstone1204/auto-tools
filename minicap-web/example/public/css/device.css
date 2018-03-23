@@ -1,0 +1,122 @@
+#main-control{
+    border: 0px solid red;
+    padding: 0;
+}
+
+
+#main-control .main-control-icon{
+    text-align: left;
+    padding: 0;
+}
+
+#device-show{
+
+top:5px;
+border-radius: 5px;
+border: 0px solid blue;
+padding: 0;
+background: url(../tt.gif) no-repeat;;
+height:900px;
+width:200px;
+
+
+
+}
+
+#assist-control{
+    width:300px;
+    border: 0px solid red;
+    padding: 0;
+    float: right;
+
+}
+
+
+#upload,#msg,#command{
+    padding: 0;
+    margin-top:5px;
+   
+ 
+}
+
+#back-info pre{
+	height:200px;
+}
+
+
+.device-option{
+
+    margin-left:10px;
+    padding: 5px;
+}
+
+.case-option{
+    margin-left:10px;
+
+    padding: 1px;
+
+
+}
+
+small{
+    margin-top: 10px;
+}
+
+.device-case-selected{
+    border:2px solid  #46b8da;
+    border-radius:5px;
+}
+
+.mode-selected{
+    border:2px solid  #46b8da;
+    border-radius:5px;
+}
+
+#deviceinfo{
+    margin-top:10px;
+}
+
+#target{
+    margin-top: 10px;
+}
+
+#result{
+    margin-top: 10px;
+}
+#target select{
+    margin-left: 10px;
+}
+#btn-playback{
+    margin-top: 10px;
+}
+
+
+
+#btn-refresh,#btn-record,#btn-screenshot{
+    margin-top: 10px;
+}
+
+#recordname{
+    margin-top: 10px;
+}
+#tip{
+    margin-top: 10px;
+}
+
+.scroll{
+    overflow-y:auto;
+    height:100px;
+}
+
+.pass{
+    color:green;
+}
+.fail{
+    color: red;
+}
+
+.dotted-decorate{
+
+    border-radius:5px;
+    border:1px solid #d0d0d0;
+}

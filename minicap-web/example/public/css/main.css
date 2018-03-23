@@ -1,0 +1,49 @@
+
+body{
+
+}
+#device{
+    border: 0px solid red;
+    padding: 0;
+    text-align: left;
+
+}
+
+
+#script{
+    border: 0px solid red;
+}
+
+.glyphicon{
+	cursor: pointer;
+}
+#main-control .glyphicon{
+
+    color:gray;
+}
+
+#main-control .glyphicon:hover{
+	color: 	#F4A460;
+}
+.glyphicon-ok{
+	color: #3CB371;
+
+}
+
+.glyphicon-play{
+	color: #3CB371;
+}
+.glyphicon-stop{
+	color:#FF0000;
+
+}
+.glyphicon-file{
+	color: 	#7B68EE;
+}
+
+
+
+.hidden{
+	display: none;
+}
+
