@@ -46,8 +46,8 @@ var ws_name="a_"+getParam("n");
 console.log("ws_name="+ws_name);
 
 
-
-var ws_url='ws://localhost:'+ws_port;
+var ws_url='ws://'+target_ip+':'+ws_port;
+//var ws_url='ws://localhost:'+ws_port;
 
 console.log("ws_url="+ws_url);
 
@@ -74,14 +74,20 @@ ws.onmessage = function(message) {
 
     //设定全局变量设备宽度
     dwidth=img.width;
+    dheight=img.height;
 
 
     canvas.width =bw1;
-    canvas.height =scale*bw1;
-   // console.log("接受的图像宽高 和比例"+img.width+"x"+img.height+" scale "+scale);
-    //console.log("canvas size "+canvas.width+"x"+canvas.height);
 
-    g.drawImage(img, 0, 0,img.width,img.height,0,0,canvas.width,canvas.height)
+    //canvas.height =(img.height*bw1)/img.width;
+
+    canvas.height=scale*bw1;
+
+    console.log("接受的图像宽高 和比例"+img.width+"x"+img.height+" scale "+scale);
+    //console.log("canvas size "+canvas.width+"x"+scale*bw1);
+   // console.log("height_test=>"+height_test);
+
+    g.drawImage(img, 0, 0,img.width,img.height,0,0,canvas.width,scale*bw1)
 
     
     //g.drawImage(img, 0, 0)
@@ -146,7 +152,7 @@ function resetscreen(){
       //console.log("重设设备投影区域宽高 "+w+" "+h);
   }else{
     //alert("设备投影可能会超出投影区域！");
-    console.log("设备投影可能会超出投影区域！");
+    //console.log("设备投影可能会超出投影区域！");
   }
 }
 

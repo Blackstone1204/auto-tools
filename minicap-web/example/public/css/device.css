@@ -58,13 +58,22 @@ width:200px;
 
 }
 
+.step-option{
+    margin-left:10px;
+
+    padding: 1px;
+
+
+}
+
 small{
     margin-top: 10px;
 }
 
 .device-case-selected{
-    border:2px solid  #46b8da;
+    /*border:2px solid  #46b8da;*/
     border-radius:5px;
+    background-color: #46b8da;
 }
 
 .mode-selected{
@@ -97,6 +106,9 @@ small{
 }
 
 #recordname{
+    margin-top: 10px;
+}
+#message{
     margin-top: 10px;
 }
 #tip{

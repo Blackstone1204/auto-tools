@@ -24,18 +24,32 @@ function register(){
     home();
    // show();
     drag();
+    //
+    entry();
+
+    //back
+
+    focus();
     
    //
+
+    moveListen();
+
+    //
    modeToggle();
 
 
     recordstatuschange();
+
+    waitClick();
     refresh();
     screenshotByHand();
     recordoptionshow();
     deviceoptionshow();
 
    playback();
+
+
 
 }
 
@@ -83,7 +97,7 @@ function menuevent(){
 	$("#menu").click(function(){
 
 		actionexecute("menu","");
-		actionjudge("menu","");
+		//actionjudge("menu","");
 
 	});
 
@@ -98,7 +112,7 @@ function backevent(){
     $("#back").click(function(){
 
 		actionexecute("back","");
-		actionjudge("back","");
+		//actionjudge("back","");
 
 	});
 
@@ -110,38 +124,38 @@ function home(){
 	$("#home").click(function(){
 
 		actionexecute("home","");
-		actionjudge("home","");
+		//actionjudge("home","");
 
 	});
 
 }
 
 //单击事件
-function touch(){
+// function touch(){
 
 
-	$("#device-show").click(function(e){
+// 	$("#device-show").click(function(e){
 
-		//alert("test");
-
-
-		console.log("设备显示区域被点击");
-        var point={};
-        point.x=e.clientX;
-        point.y=e.clientY;
-        var realpoint=convert_2(point);
-
-        var action="touch"
-		var args="";
-		args=";"+realpoint.x+";"+realpoint.y;
-
-        //执行命令
-		actionexecute(action,args);
+// 		//alert("test");
 
 
+// 		console.log("设备显示区域被点击");
+//         var point={};
+//         point.x=e.clientX;
+//         point.y=e.clientY;
+//         var realpoint=convert_2(point);
 
-	});
-}
+//         var action="touch"
+// 		var args="";
+// 		args=";"+realpoint.x+";"+realpoint.y;
+
+//         //执行命令
+// 		actionexecute(action,args);
+
+
+
+// 	});
+// }
 
 
 
@@ -174,7 +188,7 @@ function dbtouch(){
 }
 
 
-//滑动事件
+//滑动事件或单击事件
 function drag(){
 
 	$("#device-show").mouseup(function(e){
@@ -211,15 +225,18 @@ function drag(){
 		    var args0=";"+webdownpoint.x+";"+webdownpoint.y+";"+webuppoint.x+";"+webuppoint.y;
 
 			actionexecute(action,args);
-			actionjudge(action,args0);
+			//actionjudge(action,args0);
 
 		}
 
 		if(flag2){
 
 
+
 			//算点击事件
-	        //console.log("设备显示区域被点击");
+	
+
+	        console.log("设备显示区域被点击 "+isWait());
             var point={};
             point.x=e.clientX;
             point.y=e.clientY;
@@ -228,11 +245,12 @@ function drag(){
             var webpoint=convert_2(point);
 
             var action="touch"
+
 		    var args="";
-		    var args0="";
+		    //var args0="";
 
 		    args=";"+realpoint.x+";"+realpoint.y;
-		    args0=";"+webpoint.x+";"+webpoint.y;
+		    //args0=";"+webpoint.x+";"+webpoint.y;
 
 
 		    //根据时间判断是否是长按操作
@@ -246,7 +264,10 @@ function drag(){
 
             //执行命令
 		    actionexecute(action,args);
-		    actionjudge(action,args0);
+
+		    //
+
+		  
 		}
 
 	});
@@ -276,13 +297,98 @@ function drag(){
 
 //文本输入
 function entry(){
-	var action="entry";
 
+	$(document).keydown(function(event){
+		var hasF=$("#message").is(":focus");
+
+　　　　if(event.keyCode == 13&&hasF){
+
+
+　　　　 var actionName="input";
+		var args=";"+$("#message").val();
+		actionexecute(actionName,args);
+
+		$("#message").val("");
+
+
+
+　　　　}else if(event.keyCode==8){
+
+　　　　 var actionName="key_back";
+		var args=";";
+		actionexecute(actionName,args);
+
+
+      }
+
+　　});
 
 }
 
+//
+
+
+
+
+
+//点击操作文本聚焦
+function focus(){
+	$("#device-show").click(function(){
+
+		//console.log("click 触发focus事件...");
+
+		$("#message").focus();
+	});
+}
+
+//点击位置实时显示
+
+function moveListen(){
+
+	$("#device-show").mousemove(function(e){
+
+		
+
+		var p={x:e.clientX,y:e.clientY}
+		var pn=convert_2(p);
+		$("#reslv").text(pn.x+"x"+pn.y+"@"+dwidth+"x"+dheight);
+
+		//console.log("e=>"+e.clientX+" "+e.clientY);
+
+
+
+
+	});
+
+}
 //开启录制脚本
 function recordstatuschange(){
+
+	//初始状态判断
+		
+	     //  var args={};
+	     //  args.userName=getParam("userName");
+	     //  args.serial=getParam("serial");
+
+	     //  var url="http://"+target_ip+":"+target_port+"/auto-web/mGetUserRecord";
+	     //  var obj=get(url,args);
+	     //  if(obj==undefined)return;
+
+
+	     //  if(obj.data=undefined)return;
+
+	     //  ///if(obj.data==null)return;
+
+	  	  // if(obj.data.length>0){
+	     //      $("#btn-record").text("停止录制");
+		    //   $("#btn-record").addClass("recording");
+
+		    //   //标记一个时间点 对应后台录制图片保存位置
+		    //   $("#timerecord").html(getTimeStr());
+
+	     //  	}
+
+
 
 	$("#btn-record").click(function(){
 
@@ -327,6 +433,47 @@ function recordstatuschange(){
 //是否录屏中
 function isrecording(){
   return $("#btn-record").hasClass("recording");
+
+}
+
+
+//开启自动识别模式 waiting
+function waitClick(){
+	$("#waiter").click(function(){
+
+		console.info("waiting模式切换");
+		waitToggle();
+
+	});
+
+}
+function waitToggle(){
+
+	if(isWait()){
+		$("#waiter").removeClass("waiting");
+		$(".glyphicon-eye-open").css("color","");
+
+	}
+	else {
+		$("#waiter").addClass("waiting");
+		$(".glyphicon-eye-open").css("color","red");
+
+	}
+
+}
+
+function waitRemove(){
+	if(isWait()){
+		$("#waiter").removeClass("waiting");
+		$(".glyphicon-eye-open").css("color","");
+
+	}
+
+}
+
+function isWait(){
+
+	return $("#waiter").hasClass("waiting");
 
 }
 
@@ -418,6 +565,9 @@ function convert_2(point){
 
 //调用本地方法执行action
 function actionexecute(action,argstr){
+
+
+
 	var interfaceName="";
 	var url="http://"+target_ip+":"+target_port+"/auto-web/actionControl";
     
@@ -426,22 +576,54 @@ function actionexecute(action,argstr){
     args.serial=getParam("serial");
     args.userName=getParam("userName");
     args.actionName=action;
+
+    if(isWait()&&isrecording()){
+		args.actionName="wait";
+
+		waitRemove();
+
+	}
+
+
     args.args=argstr;
     args.sw=bw2;
     args.isRecording=String(isrecording());
 
-    args.mode=t[0].getAttribute("id");
+    //args.mode=t[0].getAttribute("id");
+    args.mode=0;
     console.log("当前mode=%s",args.mode);
     args.time=$("#timerecord").text();
 
     console.log("模拟动作 "+url);
-    console.log("serial="+args.serial+" actionName="+action+" args="+argstr+" sw="+args.sw+" isRecording="+args.isRecording);
+    console.log("serial="+args.serial+" actionName="+args.actionName+" args="+argstr+" sw="+args.sw+" isRecording="+args.isRecording);
 	
 
-	get2(url,args);
+	get3(url,args,getCurrentUserRecord);
+
+	//updateUI();
 
 
 }
+
+function delUserRecordLast(){
+
+	$("#del-last").click(function(){
+	  console.log("del-last");
+
+	  var url="http://"+target_ip+":"+target_port+"/auto-web/mDelUserRecordLast";
+	  var args={};
+      args.serial=getParam("serial");
+      args.userName=getParam("userName");
+
+      get3(url,args,getCurrentUserRecord);
+
+	});
+
+
+
+
+}
+
 
 //录屏判断
 function actionjudge(action,argstr){
@@ -450,12 +632,23 @@ function actionjudge(action,argstr){
 
 	//console.log("录屏模式 记录动作");
 
+
+
+
 	var url="http://"+target_ip+":"+target_port+"/auto-web/actionRecord";
 	var args={};
 
 	args.serial=getParam("serial");
 	args.userName=getParam("userName");
     args.actionName=action;
+
+    args.sw=bw2;
+
+   //如果开启wait状态 则actionName=wait
+
+	if(isWait())
+		args.actionName="wait"
+	
     args.args=argstr;
 
 
@@ -478,6 +671,13 @@ function refresh(){
 }
 
 function recordStop(){
+
+	//清楚录制步骤view
+	clearRecord();
+
+
+
+	//
 	var url="http://"+target_ip+":"+target_port+"/auto-web/recordStop";
 	var args={};
 	args.serial=getParam("serial");
@@ -491,9 +691,143 @@ function recordStop(){
 	//get2(url,args,recordoptionshow);
 
 	get2(url,args);
+	//get3(url,args,recordoptionshow);
 
 	//recordoptionshow();
 
+
+}
+
+function clearRecord(){
+	$("#recordmsg").empty();
+}
+
+function getCurrentUserRecord(){
+
+	      if(!isrecording())return;
+		     //
+	     console.log("绘制当期录制步骤...");
+
+         //显示用例选择
+	      var args={};
+	      args.userName=getParam("userName");
+	      args.serial=getParam("serial");
+
+	      var url="http://"+target_ip+":"+target_port+"/auto-web/mGetUserRecord";
+	      var obj=get(url,args);
+	      if(null==obj.data){
+
+	      	return;
+
+	      }
+
+
+
+	      console.log("请求用户录制脚本 url="+url+" userName="+args.userName );
+
+	      var prefix="<small class='col-md-12'>已录步骤</small>";
+	      var html=prefix+"<div class='scroll dotted-decorate col-md-12'>";
+
+	      for(var i=obj.data.length-1;i>=0;i--){
+
+
+	      	var command=obj.data[i];
+	      	var actionName=command.split(";")[0];
+
+	      	var msg="";
+
+	      	if(actionName.toLowerCase().indexOf("touch")>-1){
+	      		console.log("touch系统事件.")
+	      		var len=command.split(";")[1].split("_").length;
+	      	    console.log("len="+len);
+	      	    var str=command.split(";")[1].split("_")[2];
+	      	    if(len>3){
+	      		for(var j=3;j<len;j++){
+	      			var sp=command.split(";")[1].split("_")[j];
+	      			console.log("sp:"+sp);
+	      			str+="_"+sp;
+
+	      		}
+
+	      	}
+	      	  msg=actionName+" "+str;
+
+	      	}else{
+	      		console.log("非touch系统事件.")
+	      		var reg = new RegExp(";" , "g" )
+                msg = command.replace( reg ," ");
+
+
+	      	}
+
+
+	      	console.log("录制返回步骤:"+msg)
+
+	   
+
+	      	//html+="<small class='case-option col-md-2' id='"+id+"' title='"+title+"'>"+getshort(name,10)+"</small
+	      	if(i==obj.data.length-1)
+	      		html+="<small class='step-option col-md-12'><span id='"+i+"' class='col-md-1'>"+(i+1)+"</span><span title='"+msg+"'class='col-md-10' style='overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>"+msg+"</span><span id='del-last' class='fa fa-trash col-md-1'></span></small>";
+	      	else
+	      		html+="<small class='step-option col-md-12'><span id='"+i+"' class='col-md-1'>"+(i+1)+"</span><span title='"+msg+"'class='col-md-10' style='overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>"+msg+"</span><span class='col-md-1'></span></small>";
+
+
+
+
+	
+
+	      }
+	      html+="</div>";
+
+
+
+          $("#recordmsg").empty();
+	      $("#recordmsg").html(html);
+
+
+	      //重新添加del-last event
+	       delUserRecordLast();
+
+	      //显示基准选择
+
+	      // var prefix="<small class='col-md-2'>基准选择</small>";
+	      // var html=prefix+"<select class='col-md-2'>";
+
+	      // for(var i=0;i<obj.data.length;i++){
+	      // 	var name=obj.data[i].recordName;
+	      // 	var tip=obj.data[i].tip;
+	      // 	var method=obj.data[i].method;
+	      // 	var id=obj.data[i].recordId;
+
+	      //   if(obj.data.length<1){
+	      // 		html+="<option id='"+id+"'>无用例</option>";
+	      // 		break;
+	      // 	}
+
+	      // 	html+="<option id='"+id+"'>"+getshort(name,10)+"</option>";
+
+	      // }
+	      // $("#target").empty();
+
+	      // $("#target").html(html);
+
+
+
+	     //添加选中事件
+	     $(".case-option:first").addClass("device-case-selected");
+
+    $(".case-option").click(function(){
+    	   if($(this).hasClass("device-case-selected"))
+    	   	$(this).removeClass("device-case-selected");
+    	   else{
+    	   	$(".case-option").removeClass("device-case-selected");
+    	   	$(this).addClass("device-case-selected");
+    	   	    
+
+    	   }
+    	   
+    	
+    });
 
 }
 
@@ -512,7 +846,8 @@ function screenshotByHand(){
         args.serial=getParam("serial");
         args.userName=getParam("userName");
         args.isRecording="true";
-        args.mode=t[0].getAttribute("id");
+        //args.mode=t[0].getAttribute("id");
+        args.mode="easy_by_hand"
         args.time=$("#timerecord").text();
 
         console.log("手动截屏 %s",args.mode);
@@ -541,6 +876,12 @@ function recordoptionshow(){
 
 	      var prefix="<small class='col-md-12'>用例选择</small>";
 	      var html=prefix+"<div class='scroll dotted-decorate col-md-12'>";
+
+	      if(obj==null){
+	      	$("#historymsg").empty();
+	      	$("#historymsg").html("还没有录制用例...");
+	      	return;
+	      }
 
 	      for(var i=0;i<obj.data.length;i++){
 
@@ -703,10 +1044,12 @@ function showplaybackresult(data){
 
 		var result=data.data[key].result===true?"pass":"fail";
 		var model=data.data[key].model;
+		var msg=data.data[key].msg;
+		var spend=data.data[key].spend;
 
-		html+="<tr><td>"+model+"</td><td>"+key+"</td><td class='"+result+"'>"+result+"</td></tr>";
+		html+="<tr><td>"+model+"</td><td class='"+result+"'>"+result+"</td><td>"+msg+"</td><td style='color:#46b8da'>"+spend+" sec</td></tr>";
 
-	   console.log("key="+key+" result="+result);
+	   console.log("key="+key+" result="+result+" msg="+msg);
 
 	}
 

@@ -29,11 +29,18 @@
         <i class="upload glyphicon glyphicon-home" id="home"></i>
         <i class="upload glyphicon glyphicon-circle-arrow-left" id="back"></i>
         <i class="upload glyphicon glyphicon-pencil"></i>
-        <i class="upload glyphicon glyphicon-cloud-upload"></i>
+        <i id="waiter" class="upload glyphicon glyphicon-eye-open" style=""></i>
+
+        <i id="reslv"></i>
       </p>
       </div>
     </div>
-    <div id="device-show" class="col-md-11"></div>
+
+
+
+    <div id="device-show" class="col-md-11">
+      
+    </div>
 
   </div>
 
@@ -46,21 +53,27 @@
         <label for="record" class="col-md-2 control-label">脚本录制</label>
         <div class="col-md-10" id="record">
 
-          <small class="col-md-2 record-method  device-case-selected">坐标</small>
+<!--           <small class="col-md-2 record-method  device-case-selected">坐标</small>
           <small class="col-md-2 record-method">其他</small>
 
           <small id='easy' class="col-md-offset-1 col-md-2 record-mode  mode-selected">easy-mode</small>
           <small id='strict' class="col-md-2 record-mode">strict-mode</small>
-          <small style="color:red;font-weight:bold;">请不要把验证点放在最后一步,可以多录制一步</small>
+          <small style="color:red;font-weight:bold;">请不要把验证点放在最后一步,可以多录制一步</small> -->
 
          <input type="text" name="" id="recordname" placeholder="请输入用例名称" class="col-md-12" />
-          <textarea name="" id="tip" placeholder="这用例是做什么的呢" class="col-md-12"></textarea>
+
+         <input type="text" class="form-control" id="message" placeholder="填写内容 enter发送"/>
+          <textarea name="" id="tip" placeholder="这用例是做什么的呢" class="col-md-12" hidden></textarea>
+
+          <div id="msg" class="form-group  form-group-md col-md-12">
+
+          </div>
         
-          <a href="#" id="btn-record" class="btn btn-info btn-sm col-md-offset-4 col-md-2"  >开始录制</a>
+          <a href="#" id="btn-record" class="btn btn-info btn-sm col-md-offset-6 col-md-2"  >开始录制</a>
  
           <a href="#" id="btn-refresh" class="btn btn-info btn-sm col-md-offset-1 col-md-2 " >刷 新</a>
 
-          <a href="#" id="btn-screenshot" class="btn btn-info btn-sm col-md-offset-1 col-md-2">手动截屏</a>
+<!--           <a href="#" id="btn-screenshot" class="btn btn-info btn-sm col-md-offset-1 col-md-2">手动截屏</a> -->
 
           <span id="timerecord" style="display:none;"></span>
 
@@ -72,6 +85,7 @@
         <div class="col-md-10" id="playback">
 
           <div id="historymsg" class=""></div>
+           <div id="recordmsg" class=""></div>
 
           <div id="deviceinfo" class=""></div>
 
@@ -86,34 +100,22 @@
         </div>
       </div>
 
-      <div id="msg" class="form-group  form-group-md row">
-        <label for="message" class="col-md-2 control-label">文本信息</label>
-        <div class="col-md-10">
-          <input type="text" class="form-control" id="message" placeholder="填写内容 enter发送">
-        </div>
-      </div>
 
-      <div id="msg" class="form-group  form-group-md row">
+
+<!--       <div id="msg" class="form-group  form-group-md row">
         <label for="adbshell" class="col-md-2 control-label">adb shell</label>
         <div class="col-md-10">
           <input type="text" class="form-control" id="adbshell" placeholder="adb shell命令 enter发送">
         </div>
-      </div>
+      </div> -->
 
 
-      <div id="msg" class="form-group  form-group-md row">
+<!--       <div id="msg" class="form-group  form-group-md row">
         <label for="apk" class="col-md-2 control-label">apk上传</label>
         <div class="col-md-10">
           <input type="file" class="form-control" id="apk" placeholder="apk上传">
         </div>
-      </div>
-
-
-
-
-
-
-
+      </div> -->
       
 
     </div>

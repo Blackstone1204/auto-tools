@@ -72,7 +72,7 @@ wss.on('connection', function(ws) {
   var bannerLength = 2
   var readFrameBytes = 0
   var frameBodyLength = 0
-  var frameBody = new Buffer(0)
+  var frameBody = Buffer.alloc(0)
   var banner = {
     version: 0
   , length: 0
@@ -187,7 +187,7 @@ wss.on('connection', function(ws) {
 
             cursor += frameBodyLength
             frameBodyLength = readFrameBytes = 0
-            frameBody = new Buffer(0)
+            frameBody = Buffer.alloc(0)
           }
           else {
             // console.info('body(len=%d)', len - cursor)
